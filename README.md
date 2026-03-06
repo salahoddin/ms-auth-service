@@ -36,6 +36,28 @@ MYSQL_PORT=3306
 JWT_SECRET=your_jwt_secret
 ```
 
+## Kubernetes Secrets
+Kubernetes manifests expect a `manifests/secret.yaml` file that is intentionally gitignored.
+
+Create `manifests/secret.yaml` with your real values:
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: auth-secret
+stringData:
+  MYSQL_PASSWORD: your_password
+  JWT_SECRET: your_jwt_secret
+type: Opaque
+```
+
+Apply the manifests:
+
+```bash
+kubectl apply -f ./
+```
+
 ## Database Initialization
 Use `init.sql` as a starting point:
 - creates DB user
